@@ -2,17 +2,16 @@ package com.example.integraopaft;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.view.MotionEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import java.util.Calendar;
 
@@ -29,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
         button_Cadastrar = findViewById(R.id.button_Cadastrar);
         button_Cadastrar.setEnabled(false);
+
+        button_Cadastrar.setOnClickListener(view -> {
+            exibirDialogSucesso();
+        });
 
 
 
@@ -77,5 +80,20 @@ public class MainActivity extends AppCompatActivity {
         datePickerDialog.show();
 
 
+    }
+
+    private void exibirDialogSucesso() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog_black, null);
+        builder.setView(dialogView);
+
+        Button button_OK = dialogView.findViewById(R.id.button_OK);
+        AlertDialog dialog = builder.create();
+
+        button_OK.setOnClickListener(view -> {
+            dialog.dismiss();
+        });
+
+        dialog.show();
     }
 }
